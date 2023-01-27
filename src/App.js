@@ -1,20 +1,32 @@
-import { useState } from "react";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import BlogForm from "./components/BlogForm";
 
 function App() {
-  const [title, setTitle] = useState('')
-  
   return (
-    <div className="container">
-      <div className="mb-3">
-        <label className="form-label">제목</label>
-        <input className="form-control" value={title} onChange={(e)=>{
-          setTitle(e.target.value)
-        }} />
+    <BrowserRouter>
+      <nav className="navbar navbar-dark bg-dark">
+        <div className="container">
+          <Link to="/" className="navbar-brand">
+            Home
+          </Link>
+          <div>
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link to="/blogs" className="nav-link active" aria-current="page">
+                  blogs
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div className="container">
+        <Routes>
+          <Route path="/"></Route>
+          <Route path="/blogs" element={<BlogForm />}></Route>
+        </Routes>
       </div>
-      <button className="btn btn-primary">
-        등록하기
-      </button>
-    </div>
+    </BrowserRouter>
   );
 }
 
