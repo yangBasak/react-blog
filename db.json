@@ -1,13 +1,13 @@
 {
   "posts": [
     {
-      "title": "test1",
-      "content": "테스트 포스트입니다.",
+      "title": "d",
+      "content": "",
       "id": 1
     },
     {
-      "title": "test2",
-      "content": "test2 컨텐츠",
+      "title": "d",
+      "content": "",
       "id": 2
     }
   ]
