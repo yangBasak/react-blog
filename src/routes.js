@@ -2,6 +2,7 @@ import Homepage from "./pages/Homepage";
 import CreatePage from "./pages/CreatePage";
 import EditPage from "./pages/EditPage";
 import ListPage from "./pages/listPage";
+import ShowPage from "./pages/showPage";
 
 const Routes = [
     {
@@ -17,8 +18,12 @@ const Routes = [
       element: <CreatePage />
     },
     {
-      path: '/blogs/edit',
+      path: '/blogs/:id/edit',
       element: <EditPage />
+    },
+    {
+      path: '/blogs/:id',
+      element: <ShowPage />
     },
   ]
 
