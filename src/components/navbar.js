@@ -5,7 +5,20 @@ const Navbar = () => {
         <div className="container">
           <Link to="/" className="navbar-brand">Home</Link>
           <div>
-            <ul className="navbar-nav">
+            <ul 
+              className="navbar-nav"
+              style={{flexDirection: 'row'}}  
+            >
+              <li className="nav-item me-2">
+                <NavLink 
+                    activeClassName="active"
+                    to="/admin" 
+                    className="nav-link" 
+                    aria-current="page"
+                >
+                  관리자
+                </NavLink>
+              </li>
               <li className="nav-item">
                 <NavLink 
                     activeClassName="active"

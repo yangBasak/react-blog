@@ -3,6 +3,7 @@ import CreatePage from "./pages/CreatePage";
 import EditPage from "./pages/EditPage";
 import ListPage from "./pages/listPage";
 import ShowPage from "./pages/showPage";
+import AdminPage from "./pages/AdminPage";
 
 const Routes = [
     {
@@ -12,6 +13,10 @@ const Routes = [
     {
       path: '/blogs',
       element: <ListPage />
+    },
+    {
+      path: '/admin',
+      element: <AdminPage />
     },
     {
       path: '/blogs/create',

@@ -11,6 +11,8 @@ const BlogForm = ({editing}) => {
   const [orginalTitle, setOrginalTitle] = useState("");
   const [content, setContent] = useState("");
   const [orginalContent, setOrginalContent] = useState("");
+  const [publish, setPublish] = useState(false);
+  const [orginalPublish, setOrginalPublish] = useState(false);
   useEffect(()=>{
     if(editing){
       axios.get(`http://localhost:3001/posts/${id}`).then((res)=>{
@@ -18,18 +20,21 @@ const BlogForm = ({editing}) => {
         setContent(res.data.content)
         setOrginalContent(res.data.content)
         setOrginalTitle(res.data.title)
+        setPublish(res.data.publish)
+        setOrginalPublish(res.data.publish)
       })
     }
   },[id, editing])
 
   const isEdited = () => {
-    return title !== orginalTitle || content !== orginalContent
+    return title !== orginalTitle || content !== orginalContent || publish !== orginalPublish
   };
   const onSubmit = () => {
     if(editing){
       axios.patch(`http://localhost:3001/posts/${id}`, {
       title,
       content,
+      publish
     }).then((res)=>{
       setOrginalContent(res.data.content)
       setOrginalTitle(res.data.title)
@@ -39,12 +44,21 @@ const BlogForm = ({editing}) => {
       axios.post("http://localhost:3001/posts", {
         title,
         content,
+        publish,
         createAt: Date.now()
       }).then(()=>{
-        navigate('/blogs')
+        navigate('/admin')
       })
     }
   };
+  const goBack = () => {
+    if (editing) navigate(`/blogs/${id}`)
+    else navigate(`/blogs`)
+    
+  }
+  const onChangePublish =  (e) => {
+    setPublish(e.target.checked)
+  }
   return (
     <>
       <div className="container">
@@ -70,6 +84,15 @@ const BlogForm = ({editing}) => {
             }}
           />
         </div>
+        <div className="form-check mb-3">
+          <input 
+            className="form-check-input"
+            type="checkbox" 
+            checked={publish}
+            onChange={onChangePublish}
+          />
+          <label className="form-check-label">공개발행</label>
+        </div>
         <button 
           className="btn btn-primary" 
           onClick={onSubmit} 
@@ -77,6 +100,12 @@ const BlogForm = ({editing}) => {
         >
           
           {editing ? '수정하기':'등록하기'}
+        </button>
+        <button 
+          className="btn btn-danger ms-2"
+          onClick={goBack}
+        >
+          취소
         </button>
       </div>
     </>
